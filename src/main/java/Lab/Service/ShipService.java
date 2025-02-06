@@ -20,6 +20,7 @@ import java.util.List;
  * tonnage - we're left to assume some form of unwanted user error in that case.
  */
 @Service
+@Transactional(rollbackFor = InvalidTonnageException.class)
 public class ShipService {
     ShipRepository shipRepository;
     @Autowired
@@ -45,12 +46,14 @@ public class ShipService {
     /**
      * @return all ship entities
      */
+    
     public List<Ship> getAllShips() {
         return shipRepository.findAll();
     }
     /**
      * @return ship entity by id
      */
+    
     public Ship getShipById(long id) {
         return shipRepository.findById(id).get();
     }
